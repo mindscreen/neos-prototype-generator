@@ -1,0 +1,4 @@
+prototype(Acme.Demo:CustomPrototype) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Acme.Demo:Components.CustomPrototype {
+    }
+}

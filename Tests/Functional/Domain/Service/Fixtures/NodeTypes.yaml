@@ -1,0 +1,43 @@
+'Mindscreen.Neos:PrototypeGeneratorMixin':
+  abstract: true
+  options:
+    fusion:
+      prototypeGenerator: Mindscreen\Neos\PrototypeGenerator\Domain\Service\ComponentPrototypeGenerator
+
+'Acme.Demo:DefaultPrototype':
+  superTypes:
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+
+'Acme.Demo:CustomPrototype':
+  superTypes:
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+  options:
+    componentName: 'Acme.Demo:Components.CustomPrototype'
+
+'Acme.Demo:PropertyMapping':
+  superTypes:
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+  options:
+    componentName: 'Acme.Demo:Components.CustomPrototype'
+  properties:
+    oneLine:
+      type: string
+      ui:
+        inlineEditable: true
+    notInline:
+      type: string
+      ui:
+        label: Not Inline
+    multiLine:
+      type: string
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            multiLine: true
+    otherType:
+      type: boolean
+    _internalProperty:
+      type: string
+    image:
+      type: Neos\Media\Domain\Model\ImageInterface

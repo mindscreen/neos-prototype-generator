@@ -1,0 +1,30 @@
+prototype(Acme.Demo:DefaultPrototype) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Neos.Fusion:Renderer {
+        type = Neos.Fusion:Case {
+            pattern0 {
+                condition = Neos.Fusion:CanRender {
+                    type = 'Acme.Demo:Component.Atom.DefaultPrototype'
+                }
+                renderer = 'Acme.Demo:Component.Atom.DefaultPrototype'
+            }
+            pattern1 {
+                condition = Neos.Fusion:CanRender {
+                    type = 'Acme.Demo:Component.Molecule.DefaultPrototype'
+                }
+                renderer = 'Acme.Demo:Component.Molecule.DefaultPrototype'
+            }
+            pattern2 {
+                condition = Neos.Fusion:CanRender {
+                    type = 'Acme.Demo:Component.Organism.DefaultPrototype'
+                }
+                renderer = 'Acme.Demo:Component.Organism.DefaultPrototype'
+            }
+            default {
+                condition = ${true}
+                renderer = 'Neos.Neos:FallbackNode'
+            }
+        }
+        element {
+        }
+    }
+}

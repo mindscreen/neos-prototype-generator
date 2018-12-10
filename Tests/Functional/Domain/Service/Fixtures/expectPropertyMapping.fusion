@@ -1,0 +1,18 @@
+prototype(Acme.Demo:PropertyMapping) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Acme.Demo:Components.CustomPrototype {
+        oneLine = Neos.Neos:Editable {
+            property = 'oneLine'
+            block = false
+        }
+        notInline = ${q(node).property("notInline")}
+        notInline.@process.convertUris = Neos.Neos:ConvertUris
+        multiLine = Neos.Neos:Editable {
+            property = 'multiLine'
+        }
+        otherType = ${q(node).property("otherType")}
+        imageAsset = ${q(node).property("image")}
+        imageUri = Neos.Neos:ImageUri {
+            asset = ${q(node).property("image")}
+        }
+    }
+}
