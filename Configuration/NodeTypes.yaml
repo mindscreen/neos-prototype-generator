@@ -1,0 +1,11 @@
+'Mindscreen.Neos:PrototypeGeneratorMixin':
+  abstract: true
+  options:
+    fusion:
+      prototypeGenerator: Mindscreen\Neos\PrototypeGenerator\Domain\Service\ComponentPrototypeGenerator
+
+'Mindscreen.Neos:ContentComponent':
+  abstract: true
+  superTypes:
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+    'Neos.Neos:Content': true

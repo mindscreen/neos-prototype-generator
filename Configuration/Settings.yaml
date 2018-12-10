@@ -1,0 +1,8 @@
+Mindscreen:
+  Neos:
+    PrototypeGenerator:
+      componentPatterns:
+        - '<package>:Component.Atom.<nodetype>'
+        - '<package>:Component.Molecule.<nodetype>'
+        - '<package>:Component.Organism.<nodetype>'
+      superType: 'Neos.Neos:ContentComponent'
