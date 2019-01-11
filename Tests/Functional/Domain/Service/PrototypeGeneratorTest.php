@@ -81,6 +81,16 @@ class PrototypeGeneratorTest extends FunctionalTestCase
         self::assertSame($expectedFusion, $propertyMappingFusion);
     }
 
+    /**
+     * @test
+     */
+    public function expectChildNodeMapping()
+    {
+        $childNodeMappingFusion = $this->generateFusionForNodeType('Acme.Demo:ChildNodes');
+        $expectedFusion = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Fixtures/expectChildNodeMapping.fusion');
+        self::assertSame($expectedFusion, $childNodeMappingFusion);
+    }
+
     protected function generateFusionForNodeType($nodeTypeName)
     {
         $method = new \ReflectionMethod(

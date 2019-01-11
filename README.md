@@ -8,7 +8,9 @@ This package provides a default prototype generator for creating fusion componen
 * Extend your new node-type from `Mindscreen.Neos:ContentComponent` (or include the `'Mindscreen.Neos:PrototypeGeneratorMixin'`).
 * Inline-editable properties are recognized with `type: string` and `ui.inlineEditable: true`. Block-editing can be enabled with `ui.inline.editorOptions.multiLine: true`.
 * Images (`Neos\Media\Domain\Model\ImageInterface`) provide a `<property>Uri` and `<property>Asset`.
+* Child-nodes will render with their specific node as `node` in the context; `Neos.Neos:ContentCollection` will render with the respective `nodePath`
 * Set a specific target-component prototype in `options.componentName`.
+* Specify the child-node mapping in `options.componentMapping.childNodes.<nodeName>`
 
 ## Configuration
 Settings:
@@ -28,6 +30,9 @@ Usage in node-types:
 'Vendor.Package:Example':
   superTypes:
     'Mindscreen.Neos:ContentComponent': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
   properties:
     singleLine:
       type: string
@@ -46,5 +51,8 @@ Usage in node-types:
             multiLine: true
   options:
     componentName: 'Vendor.Package:Components.General.Example'
+    componentMapping:
+      childNodes:
+        main: content
 ```
 

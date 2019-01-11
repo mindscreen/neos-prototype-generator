@@ -1,0 +1,16 @@
+prototype(Acme.Demo:ChildNodes) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Acme.Demo:Components.CustomPrototype {
+        main = Neos.Neos:ContentCollection {
+            nodePath = 'main'
+        }
+        elements = Neos.Neos:ContentCollection {
+            nodePath = 'elements'
+        }
+        content = Neos.Neos:ContentCollection {
+            nodePath = 'container'
+        }
+        specialElement = Acme.Demo:FooBar {
+            @context.node = ${q(node).find('specialElement').get(0)}
+        }
+    }
+}

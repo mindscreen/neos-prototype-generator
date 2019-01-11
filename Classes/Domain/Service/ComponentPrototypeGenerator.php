@@ -6,6 +6,7 @@ namespace Mindscreen\Neos\PrototypeGenerator\Domain\Service;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\Neos\Domain\Service\DefaultPrototypeGeneratorInterface;
 use Neos\Flow\Annotations as Flow;
+use Neos\Utility\ObjectAccess;
 
 /**
  * @Flow\Scope("singleton")
@@ -112,9 +113,11 @@ class ComponentPrototypeGenerator implements DefaultPrototypeGeneratorInterface
             $this->addLine($output, '}');
             $this->addLine($output, 'element {');
             $output .= $this->generatePropertyMapping($nodeType);
+            $output .= $this->generateChildNodeMapping($nodeType);
             $this->addLine($output, '}');
         } else {
             $output .= $this->generatePropertyMapping($nodeType);
+            $output .= $this->generateChildNodeMapping($nodeType);
         }
         $this->addLine($output, '}');
         return $output;
@@ -160,6 +163,38 @@ class ComponentPrototypeGenerator implements DefaultPrototypeGeneratorInterface
                     $this->addLine($output, $propertyName . '.@process.convertUris = Neos.Neos:ConvertUris');
                 }
             }
+        }
+        return $output;
+    }
+
+    /**
+     * @param NodeType $nodeType
+     * @return string
+     */
+    protected function generateChildNodeMapping(NodeType $nodeType)
+    {
+        if (!isset($nodeType->getFullConfiguration()['childNodes']) || !is_array($nodeType->getFullConfiguration()['childNodes'])) {
+            return '';
+        }
+        $output = '';
+        $nodeTypeOptions = $nodeType->getOptions();
+        foreach ($nodeType->getFullConfiguration()['childNodes'] as $childNodeName => $childNodeConfiguration) {
+            if (!isset($childNodeConfiguration['type'])) {
+                continue;
+            }
+            $childNodeType = $childNodeConfiguration['type'];
+            $nodeTypeOptionsMappingName = ObjectAccess::getPropertyPath(
+                $nodeTypeOptions,
+                'componentMapping.childNodes.' . $childNodeName
+            );
+            $mappingName = $nodeTypeOptionsMappingName ? $nodeTypeOptionsMappingName : $childNodeName;
+            $this->addLine($output, $mappingName . ' = ' . $childNodeType . ' {');
+            if ($childNodeType === 'Neos.Neos:ContentCollection') {
+                $this->addLine($output, 'nodePath = \'' . $childNodeName . '\'');
+            } else {
+                $this->addLine($output, '@context.node = ${q(node).find(\'' . $childNodeName . '\').get(0)}');
+            }
+            $this->addLine($output, '}');
         }
         return $output;
     }

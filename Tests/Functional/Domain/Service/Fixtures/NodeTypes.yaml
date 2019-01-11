@@ -3,6 +3,11 @@
   options:
     fusion:
       prototypeGenerator: Mindscreen\Neos\PrototypeGenerator\Domain\Service\ComponentPrototypeGenerator
+'Neos.Neos:Content':
+  abstract: true
+'Neos.Neos:ContentCollection':
+  superTypes:
+    'Neos.Neos:Content': true
 
 'Acme.Demo:DefaultPrototype':
   superTypes:
@@ -41,3 +46,21 @@
       type: string
     image:
       type: Neos\Media\Domain\Model\ImageInterface
+
+'Acme.Demo:ChildNodes':
+  superTypes:
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+  options:
+    componentName: 'Acme.Demo:Components.CustomPrototype'
+    componentMapping:
+      childNodes:
+        container: content
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+    elements:
+      type: 'Neos.Neos:ContentCollection'
+    container:
+      type: 'Neos.Neos:ContentCollection'
+    specialElement:
+      type: 'Acme.Demo:FooBar'
