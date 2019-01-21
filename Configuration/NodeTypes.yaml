@@ -7,5 +7,5 @@
 'Mindscreen.Neos:ContentComponent':
   abstract: true
   superTypes:
-    'Mindscreen.Neos:PrototypeGeneratorMixin': true
     'Neos.Neos:Content': true
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
