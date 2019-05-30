@@ -56,3 +56,6 @@ Usage in node-types:
         main: content
 ```
 
+## Notes
+### Content-Collections
+If a node-type is a `Neos.Neos:ContentCollection` (e.g. to generate a simple box-component), a ContentCollection will be rendered as `content`. This can be configured with the option `options.componentMapping.childNodes.this`.

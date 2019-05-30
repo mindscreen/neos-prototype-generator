@@ -64,3 +64,11 @@
       type: 'Neos.Neos:ContentCollection'
     specialElement:
       type: 'Acme.Demo:FooBar'
+
+'Acme.Demo:CustomCollection':
+  superTypes:
+    'Neos.Neos:Content': true
+    'Neos.Neos:ContentCollection': true
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
+  options:
+    componentName: 'Acme.Demo:Components.CustomPrototype'

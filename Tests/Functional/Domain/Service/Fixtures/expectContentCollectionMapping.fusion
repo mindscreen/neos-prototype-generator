@@ -1,0 +1,7 @@
+prototype(Acme.Demo:CustomCollection) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Acme.Demo:Components.CustomPrototype {
+        content = Neos.Neos:ContentCollection {
+            nodePath = '.'
+        }
+    }
+}

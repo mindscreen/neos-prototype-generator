@@ -173,11 +173,23 @@ class ComponentPrototypeGenerator implements DefaultPrototypeGeneratorInterface
      */
     protected function generateChildNodeMapping(NodeType $nodeType)
     {
-        if (!isset($nodeType->getFullConfiguration()['childNodes']) || !is_array($nodeType->getFullConfiguration()['childNodes'])) {
-            return '';
-        }
         $output = '';
         $nodeTypeOptions = $nodeType->getOptions();
+        if ($nodeType->isOfType('Neos.Neos:ContentCollection')) {
+            $nodeTypeOptionsMappingName = ObjectAccess::getPropertyPath(
+                $nodeTypeOptions,
+                'componentMapping.childNodes.this'
+            );
+            if (!is_string($nodeTypeOptionsMappingName)) {
+                $nodeTypeOptionsMappingName = 'content';
+            }
+            $this->addLine($output, $nodeTypeOptionsMappingName . ' = Neos.Neos:ContentCollection {');
+            $this->addLine($output, 'nodePath = \'.\'');
+            $this->addLine($output, '}');
+        }
+        if (!isset($nodeType->getFullConfiguration()['childNodes']) || !is_array($nodeType->getFullConfiguration()['childNodes'])) {
+            return $output;
+        }
         foreach ($nodeType->getFullConfiguration()['childNodes'] as $childNodeName => $childNodeConfiguration) {
             if (!isset($childNodeConfiguration['type'])) {
                 continue;
