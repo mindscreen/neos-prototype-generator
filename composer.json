@@ -2,7 +2,7 @@
     "name": "mindscreen/neos-prototype-generator",
     "description": "Generate default fusion-prototypes to map to view-components",
     "type": "neos-package",
-    "version": "0.2.0",
+    "version": "0.3.1",
     "require": {
         "neos/neos": "^3.0||^4.0"
     },
