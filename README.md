@@ -29,7 +29,8 @@ Usage in node-types:
 ```yaml
 'Vendor.Package:Example':
   superTypes:
-    'Mindscreen.Neos:ContentComponent': true
+    'Neos.Neos:Content': true
+    'Mindscreen.Neos:PrototypeGeneratorMixin': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
