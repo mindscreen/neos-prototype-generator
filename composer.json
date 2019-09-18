@@ -3,6 +3,7 @@
     "description": "Generate default fusion-prototypes to map to view-components",
     "type": "neos-package",
     "version": "0.3.1",
+    "license": "GPL-3.0-or-later",
     "require": {
         "neos/neos": "^3.0||^4.0"
     },
